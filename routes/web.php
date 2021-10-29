@@ -23,3 +23,6 @@ Route::get('/edit/{ad?}', [\App\Http\Controllers\AdController::class, 'create'])
 Route::post('/edit/{ad?}', [\App\Http\Controllers\AdController::class, 'save'])->middleware('auth');
 
 Route::get('/delete/{ad}', [\App\Http\Controllers\AdController::class, 'delete'])->name('ads.delete')->middleware('auth');
+
+Route::get('/oauth', [\App\Http\Controllers\OauthController::class, 'index']);
+Route::get('/callback', [\App\Http\Controllers\OauthController::class, 'callback']);
