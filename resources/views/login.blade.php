@@ -15,4 +15,6 @@
         </div>
     </div>
     <input type="submit" class="btn btn-primary" value="Login"/>
-</form>
+</form> <br>
+
+<a class="btn btn-primary" href="{{ $oauth_bitbucket_uri }}" role="button">Login with Bitbucket</a>

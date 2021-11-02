@@ -13,16 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware('auth')->group(function () {
+    Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
+    Route::get('/edit/{ad?}', [\App\Http\Controllers\AdController::class, 'create'])->name('ads.create');
+    Route::post('/edit/{ad?}', [\App\Http\Controllers\AdController::class, 'save']);
+    Route::get('/delete/{ad}', [\App\Http\Controllers\AdController::class, 'delete'])->name('ads.delete');
+});
 Route::get('/', [\App\Http\Controllers\AdController::class, 'index'])->name('home');
 Route::get('/{id}', [\App\Http\Controllers\AdController::class, 'show'])->whereNumber('id')->name('ads.show');
 
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login'])->middleware('guest');
-Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-Route::get('/edit/{ad?}', [\App\Http\Controllers\AdController::class, 'create'])->name('ads.create')->middleware('auth');
-Route::post('/edit/{ad?}', [\App\Http\Controllers\AdController::class, 'save'])->middleware('auth');
-
-Route::get('/delete/{ad}', [\App\Http\Controllers\AdController::class, 'delete'])->name('ads.delete')->middleware('auth');
-
-Route::get('/oauth', [\App\Http\Controllers\OauthController::class, 'index']);
 Route::get('/callback', [\App\Http\Controllers\OauthController::class, 'callback']);
